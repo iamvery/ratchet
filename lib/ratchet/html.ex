@@ -1,6 +1,13 @@
 defmodule Ratchet.Html do
   import Kernel, except: [apply: 2]
 
+  def get_property(attributes) do
+    case List.keyfind(attributes, "data-prop", 0) do
+      {"data-prop", property} -> {:ok, property}
+      _ -> :error
+    end
+  end
+
   @doc """
   Apply content to an element
 
