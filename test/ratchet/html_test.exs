@@ -9,4 +9,11 @@ defmodule Ratchet.HtmlTest do
 
     assert result == {"div", [], ["Content"]}
   end
+
+  test "apply list of content" do
+    element = {"div", [], []}
+    result = Html.apply(element, ["one", "two"])
+
+    assert result == [{"div", [], ["one"]}, {"div", [], ["two"]}]
+  end
 end
