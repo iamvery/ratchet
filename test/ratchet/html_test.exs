@@ -3,6 +3,20 @@ defmodule Ratchet.HtmlTest do
   alias Ratchet.Html
   doctest Html
 
+  @list {"ul", [], [
+      {"li", [{"data-prop", "name"}], []},
+    ]}
+
+  test "transform element with data" do
+    data = %{"name" => ["Jay", "Les"]}
+    result = Html.transform(@list, data)
+
+    assert result == {"ul", [], [
+        {"li", [{"data-prop", "name"}], ["Jay"]},
+        {"li", [{"data-prop", "name"}], ["Les"]},
+      ]}
+  end
+
   test "get property from attribute list" do
     attributes = [{"class", "large"}, {"data-prop", "name"}]
     result = Html.get_property(attributes)
