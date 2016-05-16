@@ -1,6 +1,12 @@
 defmodule Ratchet.Html do
   import Kernel, except: [apply: 2]
 
+  @doc """
+  Transform a particular scope in the view with data
+
+      iex> Html.transform({"div", [], [{"p", [{"data-scope", "para"}, {"data-prop", "body"}], []}]}, "para", %{"body" => "Hi!"})
+      {"div", [], [{"p", [{"data-scope", "para"}, {"data-prop", "body"}], ["Hi!"]}]}
+  """
   def transform(view, scope, data) do
     Macro.prewalk view, fn
       element when is_tuple(element) ->
@@ -17,6 +23,12 @@ defmodule Ratchet.Html do
     {"data-scope", scope} in attributes
   end
 
+  @doc """
+  Transform an element with data
+
+      iex> Html.transform({"div", [], [{"p", [{"data-prop", "body"}], []}]}, %{"body" => "Hi!"})
+      {"div", [], [{"p", [{"data-prop", "body"}], ["Hi!"]}]}
+  """
   def transform({tag, attributes, children} = element, data) do
     case get_property(attributes) do
       {:ok, property} -> apply(element, data[property])
@@ -29,6 +41,14 @@ defmodule Ratchet.Html do
     [transform(child, data)|_transform(rest, data)]
   end
 
+  @doc """
+  Get the property from a list
+
+      iex> Html.get_property([:foo, :bar, {"data-prop", "wow"}])
+      {:ok, "wow"}
+      iex> Html.get_property([:foo, :bar, :baz])
+      :error
+  """
   def get_property(attributes) do
     case List.keyfind(attributes, "data-prop", 0) do
       {"data-prop", property} -> {:ok, property}
