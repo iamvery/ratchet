@@ -1,0 +1,2 @@
+%{"floki": {:hex, :floki, "0.8.0", "3ee6f8358e9f820d80f8211558458364cd137d1a7b362eb1d1989120dc288fa9", [:mix], [{:mochiweb_html, "~> 2.13", [hex: :mochiweb_html, optional: false]}]},
+  "mochiweb_html": {:hex, :mochiweb_html, "2.13.0", "795b100f757681939e2c52ab042e773af6e5602f04f4e2ea19baea832b541c08", [:rebar3], []}}
