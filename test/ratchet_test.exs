@@ -14,7 +14,10 @@ defmodule RatchetTest do
   """
 
   test "transform view with data" do
-    data = %{"body" => "View transformation protocol!", "comments" => ["It seems great!", "We'll see how it goes..."]}
+    data = [
+      %{"body" => "View transformation protocol!", "comments" => ["It seems great!", "We'll see how it goes..."]},
+      %{"body" => "Other things", "comments" => ["Wow!", "Need more info"]},
+    ]
     transformed = Ratchet.transform(@view, "article", data)
 
     expected = """
@@ -24,6 +27,13 @@ defmodule RatchetTest do
         <ul>
           <li data-prop="comments">It seems great!</li>
           <li data-prop="comments">We'll see how it goes...</li>
+        </ul>
+      </div>
+      <div data-scope="article">
+        <p data-prop="body">Other things</p>
+        <ul>
+          <li data-prop="comments">Wow!</li>
+          <li data-prop="comments">Need more info</li>
         </ul>
       </div>
     </div>
