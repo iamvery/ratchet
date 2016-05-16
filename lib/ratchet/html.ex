@@ -1,6 +1,22 @@
 defmodule Ratchet.Html do
   import Kernel, except: [apply: 2]
 
+  def transform(view, scope, data) do
+    Macro.prewalk view, fn
+      element when is_tuple(element) ->
+        if scoped?(element, scope) do
+          transform(element, data)
+        else
+          element
+        end
+      element -> element
+    end
+  end
+
+  defp scoped?({_tag, attributes, _children}, scope) do
+    {"data-scope", scope} in attributes
+  end
+
   def transform({tag, attributes, children} = element, data) do
     case get_property(attributes) do
       {:ok, property} -> apply(element, data[property])
