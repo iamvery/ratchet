@@ -1,5 +1,7 @@
 # Ratchet
 
+[![Build Status](https://travis-ci.org/iamvery/ratchet.svg?branch=master)](https://travis-ci.org/iamvery/ratchet)
+
 **TODO: Add description**
 
 ## Installation
