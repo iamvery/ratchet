@@ -18,11 +18,15 @@ defmodule Ratchet.HtmlTest do
   end
 
   test "transform scoped element with data" do
-    view = {"div", [], [{"p", [{"data-scope", "article"}, {"data-prop", "body"}], []}]}
+    view = {"div", [], [
+        {"p", [{"data-scope", "article"}, {"data-prop", "body"}], []}
+      ]}
     data = %{"body" => "Contents"}
     result = Html.transform(view, "article", data)
 
-    assert result == {"div", [], [{"p", [{"data-scope", "article"}, {"data-prop", "body"}], ["Contents"]}]}
+    assert result == {"div", [], [
+        {"p", [{"data-scope", "article"}, {"data-prop", "body"}], ["Contents"]}
+      ]}
   end
 
   test "get property from attribute list" do
