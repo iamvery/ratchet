@@ -7,6 +7,8 @@ defmodule Ratchet.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     description: description,
+     package: package,
      deps: deps]
   end
 
@@ -29,6 +31,22 @@ defmodule Ratchet.Mixfile do
   defp deps do
     [
       {:floki, "~> 0.8"}, # HTML parser
+    ]
+  end
+
+  defp description do
+    """
+    Transform plain HTML views with data
+    """
+  end
+
+  defp package do
+    [
+      name: :ratchet,
+      files: ~W(lib mix.exs README.md),
+      maintainers: ["Jay Hayes"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/iamvery/ratchet"},
     ]
   end
 end
