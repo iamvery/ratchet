@@ -7,15 +7,15 @@ defmodule Ratchet.Html do
       iex> Html.transform({"div", [], [{"p", [{"data-scope", "para"}, {"data-prop", "body"}], []}]}, "para", %{"body" => "Hi!"})
       {"div", [], [{"p", [{"data-scope", "para"}, {"data-prop", "body"}], ["Hi!"]}]}
   """
-  def transform(view, scope, data) do
-    Macro.prewalk view, fn
-      element when is_tuple(element) ->
-        if scoped?(element, scope) do
-          transform(element, data)
-        else
-          element
-        end
-      element -> element
+  def transform([], _, _), do: []
+  def transform([element|rest], scope, data) do
+    [transform(element, scope, data)|transform(rest, scope, data)]
+  end
+  def transform({tag, attributes, children} = element, scope, data) do
+    if scoped?(element, scope) do
+      transform(element, data)
+    else
+      {tag, attributes, List.flatten(transform(children, scope, data))}
     end
   end
 
