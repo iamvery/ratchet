@@ -18,6 +18,7 @@ defmodule Ratchet.Html do
       {tag, attributes, List.flatten(transform(children, scope, data))}
     end
   end
+  def transform(content, _, _), do: content
 
   defp scoped?({_tag, attributes, _children}, scope) do
     {"data-scope", scope} in attributes
