@@ -27,6 +27,8 @@ defmodule Ratchet.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:floki, "~> 0.8"}, # HTML parser
+    ]
   end
 end
