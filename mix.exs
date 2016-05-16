@@ -45,6 +45,7 @@ defmodule Ratchet.Mixfile do
       name: :ratchet,
       files: ~W(lib mix.exs README.md),
       maintainers: ["Jay Hayes"],
+      licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/iamvery/ratchet"},
     ]
   end
