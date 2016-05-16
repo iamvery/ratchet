@@ -17,6 +17,25 @@ defmodule Ratchet.HtmlTest do
       ]}
   end
 
+  test "transform element with list" do
+    data = [
+      %{"name" => ["Jay", "Les"]},
+      %{"name" => ["Sue", "Joe"]},
+    ]
+    result = Html.transform(@list, data)
+
+    assert result == [
+      {"ul", [], [
+        {"li", [{"data-prop", "name"}], ["Jay"]},
+        {"li", [{"data-prop", "name"}], ["Les"]},
+      ]},
+      {"ul", [], [
+        {"li", [{"data-prop", "name"}], ["Sue"]},
+        {"li", [{"data-prop", "name"}], ["Joe"]},
+      ]},
+    ]
+  end
+
   test "transform scoped element with data" do
     view = {"div", [], [
         {"p", [{"data-scope", "article"}, {"data-prop", "body"}], []}

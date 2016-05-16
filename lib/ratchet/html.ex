@@ -29,6 +29,10 @@ defmodule Ratchet.Html do
       iex> Html.transform({"div", [], [{"p", [{"data-prop", "body"}], []}]}, %{"body" => "Hi!"})
       {"div", [], [{"p", [{"data-prop", "body"}], ["Hi!"]}]}
   """
+  def transform(_, []), do: []
+  def transform(element, [data|rest]) do
+    [transform(element, data)|transform(element, rest)]
+  end
   def transform({tag, attributes, children} = element, data) do
     case get_property(attributes) do
       {:ok, property} -> apply(element, data[property])
