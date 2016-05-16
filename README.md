@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/iamvery/ratchet.svg?branch=master)](https://travis-ci.org/iamvery/ratchet)
 
-**TODO: Add description**
+Ratchet is an implementation of [Pakyow's][pakyow] [view transformation protocol][vtp].
 
 ## Installation
 
@@ -20,3 +20,6 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [applications: [:ratchet]]
         end
 
+
+[pakyow]: https://pakyow.org
+[vtp]: https://pakyow.org/docs/concepts/view-transformation-protocol
