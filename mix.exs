@@ -31,6 +31,7 @@ defmodule Ratchet.Mixfile do
   defp deps do
     [
       {:floki, "~> 0.8"}, # HTML parser
+      {:ex_doc, "~> 0.11", only: :dev},
     ]
   end
 
