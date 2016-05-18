@@ -24,4 +24,11 @@ defmodule Ratchet.TransformerTest do
 
     assert result == @eex_list_ast
   end
+
+  test "transform element with text content" do
+    ast = {"div", [], ["Content"]}
+    result = Transformer.transform(ast)
+
+    assert result == ast
+  end
 end
