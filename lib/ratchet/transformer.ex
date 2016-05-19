@@ -61,9 +61,8 @@ defmodule Ratchet.Transformer do
     ]
   end
 
-  defp transform_element({tag, attributes, children}, scope) do
-    children = transform(children, scope) |> List.flatten
-    {tag, attributes, children}
+  defp transform_element(element, scope) do
+    transform_children({element, scope}) |> elem(0)
   end
 
   defp transform_children({{tag, attributes, children}, property}) do
