@@ -13,10 +13,10 @@ defmodule Ratchet.EEx do
   Build an arbitrary EEx statement
 
       iex> Ratchet.EEx.eex("lolwat")
-      "<%= lolwat %>"
+      "<%= Ratchet.Data.content(lolwat) %>"
   """
   def eex(statement) do
-    "<%= #{statement} %>"
+    "<%= Ratchet.Data.content(#{statement}) %>"
   end
 
   @doc """

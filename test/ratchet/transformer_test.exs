@@ -13,7 +13,7 @@ defmodule Ratchet.TransformerTest do
         "<%= for list <- List.wrap(data.list) do %>",
         {"ul", [{"data-scope", "list"}], [
           "<%= for name <- List.wrap(list.name) do %>",
-          {"li", [{"data-prop", "name"}], ["<%= name %>"]},
+          {"li", [{"data-prop", "name"}], ["<%= Ratchet.Data.content(name) %>"]},
           "<% end %>",
         ]},
         "<% end %>",
