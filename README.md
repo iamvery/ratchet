@@ -14,12 +14,6 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [{:ratchet, "~> 0.0.1"}]
         end
 
-  2. Ensure ratchet is started before your application:
-
-        def application do
-          [applications: [:ratchet]]
-        end
-
 ## Release
 
 1. Bump the version in `mix.exs.
