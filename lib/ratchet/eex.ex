@@ -10,13 +10,13 @@ defmodule Ratchet.EEx do
   end
 
   @doc """
-  Build an arbitrary EEx statement
+  Build an EEx statement fetching content
 
-      iex> Ratchet.EEx.eex("lolwat")
+      iex> Ratchet.EEx.eex_content("lolwat")
       "<%= Ratchet.Data.content(lolwat) %>"
   """
-  def eex(statement) do
-    "<%= Ratchet.Data.content(#{statement}) %>"
+  def eex_content(property) do
+    "<%= Ratchet.Data.content(#{property}) %>"
   end
 
   @doc """
