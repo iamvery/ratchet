@@ -1,6 +1,11 @@
 # Ratchet
 
-[![Build Status](https://travis-ci.org/iamvery/ratchet.svg?branch=master)](https://travis-ci.org/iamvery/ratchet)
+[![Build Status][travis-img]][travis] [![Hex Version][hex-img]][hex]
+
+[travis-img]: https://travis-ci.org/iamvery/ratchet.svg?branch=master
+[travis]: https://travis-ci.org/iamvery/ratchet
+[hex-img]: https://img.shields.io/hexpm/v/ratchet.svg
+[hex]: https://hex.pm/packages/ratchet
 
 Ratchet is a friendly little transformer that's here to fix your views.
 
