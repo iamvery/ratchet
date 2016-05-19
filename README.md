@@ -2,33 +2,88 @@
 
 [![Build Status](https://travis-ci.org/iamvery/ratchet.svg?branch=master)](https://travis-ci.org/iamvery/ratchet)
 
-Ratchet is an implementation of [Pakyow's][pakyow] [view transformation protocol][vtp].
+Ratchet is a friendly little transformer that's here to fix your views.
+
+For use with [Phoenix][phoenix], check out [PhoenixRatchet][phoenix-ratchet].
+
+Given a plain HTMl view template like this:
+
+```html
+<section>
+  <article data-scope="posts">
+    <h2 data-prop="title"></h2>
+    <p data-prop="body"></p>
+    <ul>
+      <li data-prop="comments"></li>
+    </ul>
+  </article>
+</section>
+```
+
+It can be transformed into your final view by applying data:
+
+```elixir
+data = %{
+  posts: [
+    %{title: "Ratchet is here!", body: "Hope you like it", comments: ["Not bad"]},
+    %{title: "Robots", body: "What's the deal with them?", comments: ["Yea!", "Nah"]},
+  ]
+}
+```
+
+```html
+<section>
+  <article data-scope="posts">
+    <h2 data-prop="title">Ratchet is here!</h2>
+    <p data-prop="body">Hope you like it</p>
+    <ul>
+      <li data-prop="comments">Not bad</li>
+    </ul>
+  </article>
+  <article data-scope="posts">
+    <h2 data-prop="title">Robots</h2>
+    <p data-prop="body">What's the deal with them?</p>
+    <ul>
+      <li data-prop="comments">Yea!</li>
+      <li data-prop="comments">Nah</li>
+    </ul>
+  </article>
+</section>
+```
+
+For more information, see the [Documentation][docs].
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+1. Install with [Hex][hex]:
 
-  1. Add ratchet to your list of dependencies in `mix.exs`:
+   ```elixir
+   def deps do
+     [{:ratchet, "~> 0.0.1"}]
+   end
+   ```
 
-        def deps do
-          [{:ratchet, "~> 0.0.1"}]
-        end
+## Background
 
-  2. Ensure ratchet is started before your application:
-
-        def application do
-          [applications: [:ratchet]]
-        end
-
-
-[pakyow]: https://pakyow.org
-[vtp]: https://pakyow.org/docs/concepts/view-transformation-protocol
+Ratchet is an implementation of [Pakyow's][pakyow] [view transformation protocol][vtp].
+One of the benefits of this style of view templates is designers don't have to learn whatever the latest templating language.
+Instead views are plain HTML and CSS.
+One you get this from design, you can sprinkle in the appropriate scopes and properties for data binding.
 
 ## Release
 
 1. Bump the version in `mix.exs.
 1. Commit version with Git tag `vX.X.X`.
 1. Publish to Hex
+
    ```
    $ mix do hex.publish, hex.docs
    ```
+
+
+[phoenix]: http://www.phoenixframework.org/
+[phoenix-ratchet]: https://github.com/iamvery/phoenix_ratchet
+[pakyow]: https://pakyow.org
+[docs]: https://hexdocs.pm/ratchet
+[hex]: https://hex.pm/
+[vtp]: https://pakyow.org/docs/concepts/view-transformation-protocol
