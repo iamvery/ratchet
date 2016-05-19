@@ -20,10 +20,6 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [applications: [:ratchet]]
         end
 
-
-[pakyow]: https://pakyow.org
-[vtp]: https://pakyow.org/docs/concepts/view-transformation-protocol
-
 ## Release
 
 1. Bump the version in `mix.exs.
@@ -33,3 +29,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
    ```
    $ mix do hex.publish, hex.docs
    ```
+
+
+[pakyow]: https://pakyow.org
+[vtp]: https://pakyow.org/docs/concepts/view-transformation-protocol
