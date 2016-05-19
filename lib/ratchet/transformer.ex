@@ -39,26 +39,24 @@ defmodule Ratchet.Transformer do
     end
   end
 
-  defp transform_element({:scope, property}, element, scope) do
-    {element, _} = {element, property}
-    |> transform_children
-
+  defp transform_element({_type, property} = type, element, scope) do
     [
       eex_comprehension_open(scope, property),
-      element,
+      transform_element(type, element),
       eex_close,
     ]
   end
 
-  defp transform_element({:property, property}, element, scope) do
-    {element, _} = {element, property}
-    |> transform_content
+  defp transform_element({:scope, property}, element) do
+    {element, property}
+    |> transform_children
+    |> elem(0)
+  end
 
-    [
-      eex_comprehension_open(scope, property),
-      element,
-      eex_close,
-    ]
+  defp transform_element({:property, property}, element) do
+    {element, property}
+    |> transform_content
+    |> elem(0)
   end
 
   defp transform_element(element, scope) do
