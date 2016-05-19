@@ -1,6 +1,9 @@
 defmodule Ratchet.Renderer do
   import Ratchet.Transformer, only: [transform: 1]
 
+  @doc """
+  Render template to markup given data
+  """
   def render(template, data) do
     template
     |> parse
