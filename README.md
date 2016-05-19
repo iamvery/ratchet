@@ -29,6 +29,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 1. Bump the version in `mix.exs.
 1. Commit version with Git tag `vX.X.X`.
 1. Publish to Hex
+
    ```
    $ mix do hex.publish, hex.docs
    ```
