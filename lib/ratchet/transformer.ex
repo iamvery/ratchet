@@ -39,26 +39,37 @@ defmodule Ratchet.Transformer do
     end
   end
 
-  defp transform_element({:scope, property}, {tag, attributes, children}, scope) do
+  defp transform_element({_type, property} = type, element, scope) do
+    [
+      eex_comprehension_open(scope, property),
+      transform_element(type, element),
+      eex_close,
+    ]
+  end
+
+  defp transform_element({:scope, property}, element) do
+    {element, property}
+    |> transform_children
+    |> elem(0)
+  end
+
+  defp transform_element({:property, property}, element) do
+    {element, property}
+    |> transform_content
+    |> elem(0)
+  end
+
+  defp transform_element(element, scope) do
+    transform_children({element, scope}) |> elem(0)
+  end
+
+  defp transform_children({{tag, attributes, children}, property}) do
     children = transform(children, property) |> List.flatten
-    [
-      eex_comprehension_open(scope, property),
-      {tag, attributes, children},
-      eex_close,
-    ]
+    {{tag, attributes, children}, property}
   end
 
-  defp transform_element({:property, property}, {tag, attributes, _children}, scope) do
+  defp transform_content({{tag, attributes, _children}, property}) do
     children = eex(property) |> List.wrap
-    [
-      eex_comprehension_open(scope, property),
-      {tag, attributes, children},
-      eex_close,
-    ]
-  end
-
-  defp transform_element({tag, attributes, children}, scope) do
-    children = transform(children, scope) |> List.flatten
-    {tag, attributes, children}
+    {{tag, attributes, children}, property}
   end
 end
