@@ -12,11 +12,17 @@ defmodule Ratchet.Renderer do
     |> eval(data)
   end
 
-  defp parse(template) do
+  @doc """
+  Parse template to AST
+  """
+  def parse(template) do
     Floki.parse(template)
   end
 
-  defp compile(ast) do
+  @doc """
+  Compile markup from AST
+  """
+  def compile(ast) do
     Floki.raw_html(ast)
   end
 
