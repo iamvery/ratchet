@@ -6,7 +6,7 @@ defmodule Ratchet.EEx do
       "<%= for bar <- List.wrap(foo.bar) do %>"
   """
   def eex_comprehension_open(scope, property) do
-    eex("for #{property} <- List.wrap(#{scope}.#{property}) do")
+    "<%= for #{property} <- List.wrap(#{scope}.#{property}) do %>"
   end
 
   @doc """
