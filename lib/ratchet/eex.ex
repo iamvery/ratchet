@@ -20,6 +20,16 @@ defmodule Ratchet.EEx do
   end
 
   @doc """
+  Build an EEx statement fetching attributes
+
+      iex> Ratchet.EEx.eex_attributes("lolwat", [])
+      "<%= Ratchet.Data.attributes(lolwat, []) %>"
+  """
+  def eex_attributes(property, attributes) do
+    "<%= Ratchet.Data.attributes(#{property}, #{inspect attributes}) %>"
+  end
+
+  @doc """
   Spit out an EEx ending
   """
   def eex_close do

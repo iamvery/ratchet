@@ -55,6 +55,7 @@ defmodule Ratchet.Transformer do
 
   defp transform_element({:property, property}, element) do
     {element, property}
+    |> transform_attributes
     |> transform_content
     |> elem(0)
   end
@@ -70,6 +71,11 @@ defmodule Ratchet.Transformer do
 
   defp transform_content({{tag, attributes, _children}, property}) do
     children = eex_content(property) |> List.wrap
+    {{tag, attributes, children}, property}
+  end
+
+  defp transform_attributes({{tag, attributes, children}, property}) do
+    attributes = [eex_attributes(property, attributes)]
     {{tag, attributes, children}, property}
   end
 end
