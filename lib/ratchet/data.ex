@@ -15,10 +15,13 @@ defmodule Ratchet.Data do
 
       iex> Data.attributes({"", href: "https://google.com", rel: "nofollow"}, [])
       ~S(href="https://google.com" rel="nofollow")
+      iex> Data.attributes("lolwat", [{"data-prop", "joke"}])
+      ~S(data-prop="joke")
   """
   def attributes({_content, data_attrs}, elem_attrs) do
     build_attrs(data_attrs ++ elem_attrs)
   end
+  def attributes(_data, elem_attrs), do: build_attrs(elem_attrs)
 
   defp build_attrs(attributes) do
     Enum.map_join(attributes, " ", &build_attr/1)
