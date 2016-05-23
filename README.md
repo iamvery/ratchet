@@ -11,7 +11,7 @@ Ratchet is a friendly little transformer that's here to fix your views.
 
 For use with [Phoenix][phoenix], check out [PhoenixRatchet][phoenix-ratchet].
 
-Given a plain HTMl view template like this:
+Given a plain HTML view template like this:
 
 ```html
 <section>
