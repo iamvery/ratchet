@@ -9,4 +9,22 @@ defmodule Ratchet.Data do
   """
   def content(text) when is_binary(text), do: text
   def content({text, _attributes}), do: text
+
+  @doc """
+  Extract attributes from a data property
+
+      iex> Data.attributes({"", href: "https://google.com", rel: "nofollow"}, [])
+      ~S(href="https://google.com" rel="nofollow")
+  """
+  def attributes({_content, data_attrs}, elem_attrs) do
+    build_attrs(data_attrs ++ elem_attrs)
+  end
+
+  defp build_attrs(attributes) do
+    Enum.map_join(attributes, " ", &build_attr/1)
+  end
+
+  defp build_attr({attribute, value}) do
+    ~s(#{attribute}="#{value}")
+  end
 end
