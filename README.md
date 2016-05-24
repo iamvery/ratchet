@@ -64,7 +64,7 @@ For more information, see the [Documentation][docs].
 
    ```elixir
    def deps do
-     [{:ratchet, "~> 0.0.1"}]
+     [{:ratchet, "~> 0.2.1"}]
    end
    ```
 
