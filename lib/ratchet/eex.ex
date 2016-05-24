@@ -25,14 +25,8 @@ defmodule Ratchet.EEx do
       iex> Ratchet.EEx.eex_attributes("lolwat", [])
       "<%= Ratchet.Data.attributes(lolwat, []) %>"
   """
-  if Code.ensure_loaded?(Phoenix.HTML) do
-    def eex_attributes(property, attributes) do
-      "<%= Phoenix.HTML.raw Ratchet.Data.attributes(#{property}, #{inspect attributes}) %>"
-    end
-  else
-    def eex_attributes(property, attributes) do
-      "<%= Ratchet.Data.attributes(#{property}, #{inspect attributes}) %>"
-    end
+  def eex_attributes(property, attributes) do
+    "<%= Ratchet.Data.attributes(#{property}, #{inspect attributes}) %>"
   end
 
   @doc """
