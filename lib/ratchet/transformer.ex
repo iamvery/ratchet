@@ -8,7 +8,7 @@ defmodule Ratchet.Transformer do
 
   def transform([], _), do: []
   def transform([child|rest], scope) do
-    [transform(child, scope)|transform(rest, scope)]
+    [transform(child, scope)|transform(rest, scope)] |> List.flatten
   end
 
   def transform(text, _scope) when is_binary(text), do: text

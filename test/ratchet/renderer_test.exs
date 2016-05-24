@@ -4,6 +4,8 @@ defmodule Ratchet.RendererTest do
   doctest Renderer
 
   @template """
+  <div>content</div>
+  <div data-scope="toplevel"></div>
   <section>
     <article data-scope="posts">
       <p data-prop="body"></p>
@@ -16,12 +18,14 @@ defmodule Ratchet.RendererTest do
   """
 
   test "render/2" do
-    data = %{posts: [
+    data = %{toplevel: "", posts: [
         %{body: "Thoughts and opinions.", link: {"Google", href: "https://google.com"}, comments: ["I disagree."]},
         %{body: "JavaScript is dead.", link: {"Iamvery", href: "https://iamvery.com"}, comments: ["WAT", "YAY"]},
       ]}
 
     rendered = """
+    <div>content</div>
+    <div data-scope="toplevel"></div>
     <section>
       <article data-scope="posts">
         <p data-prop="body">Thoughts and opinions.</p>
