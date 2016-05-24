@@ -31,4 +31,11 @@ defmodule Ratchet.TransformerTest do
 
     assert result == ast
   end
+
+  test "transform with adjacent top-level element" do
+    ast = [{"h2", [], []}, {"div", [{"data-scope", "foo"}], []}]
+    result = Transformer.transform(ast)
+
+    assert result == [{"h2", [], []}, "<%= for foo <- List.wrap(data.foo) do %>", {"div", [{"data-scope", "foo"}], []}, "<% end %>"]
+  end
 end
