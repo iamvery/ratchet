@@ -65,7 +65,7 @@ defmodule Ratchet.Transformer do
   end
 
   defp transform_children({{tag, attributes, children}, property}) do
-    children = transform(children, property) |> List.flatten
+    children = transform(children, property)
     {{tag, attributes, children}, property}
   end
 
