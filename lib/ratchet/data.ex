@@ -28,10 +28,10 @@ defmodule Ratchet.Data do
   end
 
   defp build_attr({attribute, value}) do
-    ~s(#{safe attribute}="#{safe value}")
+    ~s(#{escape attribute}="#{escape value}")
   end
 
-  defp safe(value) do
+  defp escape(value) do
     value |> Phoenix.HTML.html_escape |> Phoenix.HTML.safe_to_string
   end
 end
