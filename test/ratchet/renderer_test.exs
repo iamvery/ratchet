@@ -4,8 +4,7 @@ defmodule Ratchet.RendererTest do
   doctest Renderer
 
   @template """
-  <div>content</div>
-  <div data-scope="toplevel"></div>
+  <h2>Articles</h2>
   <article data-scope="posts">
     <p data-prop="body"></p>
     <a data-prop="link"></a>
@@ -22,8 +21,7 @@ defmodule Ratchet.RendererTest do
       ]}
 
     rendered = """
-    <div>content</div>
-    <div data-scope="toplevel"></div>
+    <h2>Articles</h2>
     <article data-scope="posts">
       <p data-prop="body">Thoughts and opinions.</p>
       <a href="https://google.com" data-prop="link">Google</a>
