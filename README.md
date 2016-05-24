@@ -18,6 +18,7 @@ Given a plain HTML view template like this:
   <article data-scope="posts">
     <h2 data-prop="title"></h2>
     <p data-prop="body"></p>
+    <a data-prop="permalink"></p>
     <ul>
       <li data-prop="comments"></li>
     </ul>
@@ -30,8 +31,8 @@ It can be transformed into your final view by applying data:
 ```elixir
 data = %{
   posts: [
-    %{title: "Ratchet is here!", body: "Hope you like it", comments: ["Not bad"]},
-    %{title: "Robots", body: "What's the deal with them?", comments: ["Yea!", "Nah"]},
+    %{title: "Ratchet is here!", body: "Hope you like it", permalink: {"Iamvery", href: "https://iamvery.com"}, comments: ["Not bad"]},
+    %{title: "Robots", body: "What's the deal with them?", permalink: {"Google", href: "https://google.com"}, comments: ["Yea!", "Nah"]},
   ]
 }
 ```
@@ -41,6 +42,7 @@ data = %{
   <article data-scope="posts">
     <h2 data-prop="title">Ratchet is here!</h2>
     <p data-prop="body">Hope you like it</p>
+    <a href="https://iamvery.com" data-prop="permalink">Iamvery</p>
     <ul>
       <li data-prop="comments">Not bad</li>
     </ul>
@@ -48,6 +50,7 @@ data = %{
   <article data-scope="posts">
     <h2 data-prop="title">Robots</h2>
     <p data-prop="body">What's the deal with them?</p>
+    <a href="https://google.com" data-prop="permalink">Google</p>
     <ul>
       <li data-prop="comments">Yea!</li>
       <li data-prop="comments">Nah</li>
