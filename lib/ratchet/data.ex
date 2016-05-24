@@ -14,9 +14,9 @@ defmodule Ratchet.Data do
   Extract attributes from a data property
 
       iex> Data.attributes({"", href: "https://google.com", rel: "nofollow"}, [])
-      ~S(href="https://google.com" rel="nofollow")
+      {:safe, ~S(href="https://google.com" rel="nofollow")}
       iex> Data.attributes("lolwat", [{"data-prop", "joke"}])
-      ~S(data-prop="joke")
+      {:safe, ~S(data-prop="joke")}
   """
   def attributes({_content, data_attrs}, elem_attrs) do
     build_attrs(data_attrs ++ elem_attrs)
@@ -25,6 +25,7 @@ defmodule Ratchet.Data do
 
   defp build_attrs(attributes) do
     Enum.map_join(attributes, " ", &build_attr/1)
+    |> Phoenix.HTML.raw
   end
 
   defp build_attr({attribute, value}) do

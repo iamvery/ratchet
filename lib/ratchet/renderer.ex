@@ -36,6 +36,7 @@ defmodule Ratchet.Renderer do
   end
 
   defp eval(template, data) do
-    EEx.eval_string(template, data: data)
+    EEx.eval_string(template, [data: data], engine: Phoenix.HTML.Engine)
+    |> Phoenix.HTML.safe_to_string
   end
 end
