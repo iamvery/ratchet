@@ -77,7 +77,7 @@ One you get this from design, you can sprinkle in the appropriate scopes and pro
 
 ## Release
 
-1. Bump the version in `mix.exs.
+1. Bump the version in `mix.exs`.
 1. Commit version with Git tag `vX.X.X`.
 1. Publish to Hex
 
