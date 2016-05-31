@@ -17,6 +17,24 @@ defmodule Ratchet.Data do
   def property(map, property) when is_map(map), do: map[property]
 
   @doc """
+  Prepares data for list comprehension
+
+  Ratchet must be able to consistently treat data as a list to facilitate
+  rendering multiple elements. This function supports that requirement by
+  ensuring elements are wrapped in a list.
+
+      iex> Data.prepare("data")
+      ["data"]
+      iex> Data.prepare(["one", "two"])
+      ["one", "two"]
+      iex> Data.prepare([{"foo", href: "/"}])
+      [{"foo", href: "/"}]
+      iex> Data.prepare({"foo", class: "btn"})
+      [{"foo", class: "btn"}]
+  """
+  def prepare(data), do: List.wrap(data)
+
+  @doc """
   Determines if the given data provides plain text content
 
       iex> Data.content?("text")
