@@ -1,5 +1,22 @@
 defmodule Ratchet.Data do
   @doc """
+  Get the specified property from the given data
+
+  Data is defined as:
+
+  1. A map of property keys to data values
+
+  This function provides a consistent interface for fetching a property from
+  some body of data.
+
+      iex> Data.property(%{}, :foo)
+      nil
+      iex> Data.property(%{foo: "bar"}, :foo)
+      "bar"
+  """
+  def property(map, property) when is_map(map), do: map[property]
+
+  @doc """
   Determines if the given data provides plain text content
 
       iex> Data.content?("text")
