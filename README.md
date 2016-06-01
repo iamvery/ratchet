@@ -11,6 +11,8 @@ Ratchet is a friendly little transformer that's here to fix your views.
 
 For use with [Phoenix][phoenix], check out [PhoenixRatchet][phoenix-ratchet].
 
+For more information, see the [Documentation][docs].
+
 Given a plain HTML view template like this:
 
 ```html
@@ -58,8 +60,6 @@ data = %{
   </article>
 </section>
 ```
-
-For more information, see the [Documentation][docs].
 
 ## Installation
 
