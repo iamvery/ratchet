@@ -14,7 +14,7 @@ defmodule Ratchet.Transformer do
   def transform(text, _scope) when is_binary(text), do: text
   def transform(element, scope) when is_tuple(element) do
     case get_type(element) do
-      :none -> transform_element(element, scope)
+      :none -> transform_children(element, scope)
       type -> transform_element(type, element, scope)
     end
   end
@@ -49,13 +49,9 @@ defmodule Ratchet.Transformer do
     |> elem(0)
   end
 
-  defp transform_element(element, scope) do
-    transform_children({element, scope}) |> elem(0)
-  end
-
-  defp transform_children({{tag, attributes, children}, property}) do
+  defp transform_children({tag, attributes, children}, property) do
     children = transform(children, property)
-    {{tag, attributes, children}, property}
+    {tag, attributes, children}
   end
 
   defp transform_content({{tag, attributes, children}, property}) do
