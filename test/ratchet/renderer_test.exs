@@ -72,4 +72,14 @@ defmodule Ratchet.RendererTest do
 
     assert Renderer.render(@template, data) == rendered
   end
+
+  test "tuple data with plain text updates content and attributes" do
+    data = %{foo: {"Fido", class: "pet"}}
+
+    rendered = """
+    <div class="pet" data-prop="foo">Fido</div>
+    """ |> Floki.parse |> Floki.raw_html
+
+    assert Renderer.render(@template, data) == rendered
+  end
 end
