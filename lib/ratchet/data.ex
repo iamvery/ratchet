@@ -68,6 +68,8 @@ defmodule Ratchet.Data do
 
       iex> Data.attributes({"", href: "https://google.com", rel: "nofollow"}, [])
       {:safe, ~S(href="https://google.com" rel="nofollow")}
+      iex> Data.attributes([{"foo", href: "/"}], [{"data-prop", "link"}])
+      {:safe, ~S(data-prop="link")}
       iex> Data.attributes("lolwat", [{"data-prop", "joke"}])
       {:safe, ~S(data-prop="joke")}
   """
