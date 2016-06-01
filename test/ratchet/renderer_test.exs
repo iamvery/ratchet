@@ -83,4 +83,16 @@ defmodule Ratchet.RendererTest do
 
     assert Renderer.render(@template, data) == rendered
   end
+
+  test "map data binds to internal property" do
+    data = %{foo: %{bar: "The content"}}
+
+    rendered = """
+    <div data-prop="foo">
+      <div data-prop="bar">The content</div>
+    </div>
+    """ |> Floki.parse |> Floki.raw_html
+
+    assert Renderer.render(@template, data) == rendered
+  end
 end
