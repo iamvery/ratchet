@@ -49,8 +49,7 @@ defmodule Ratchet.RendererTest do
   """ |> Floki.parse |> Floki.raw_html
 
   test "empty data renders unaffected template" do
-    data = %{foo: {nil, []}}
-    assert Renderer.render(@template, data) == @template
+    assert Renderer.render(@template, %{}) == @template
   end
 
   test "plain text data replaces template" do
