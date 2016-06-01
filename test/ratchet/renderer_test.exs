@@ -60,4 +60,16 @@ defmodule Ratchet.RendererTest do
 
     assert Renderer.render(@template, data) == rendered
   end
+
+  test "list data results in multiple elements" do
+    data = %{foo: ["First", "Second", "Third"]}
+
+    rendered = """
+    <div data-prop="foo">First</div>
+    <div data-prop="foo">Second</div>
+    <div data-prop="foo">Third</div>
+    """ |> Floki.parse |> Floki.raw_html
+
+    assert Renderer.render(@template, data) == rendered
+  end
 end
