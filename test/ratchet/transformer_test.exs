@@ -8,7 +8,7 @@ defmodule Ratchet.TransformerTest do
     ]}
 
   @eex_list_ast {"ul", [], [
-        "<%= for name <- List.wrap(data.name) do %>",
+        "<%= for name <- Ratchet.Data.property(data, :name) |> Ratchet.Data.prepare do %>",
         {"li", ["<%= Ratchet.Data.attributes(name, [{\"data-prop\", \"name\"}]) %>"], [
           "<%= if Ratchet.Data.content?(name) do %>",
           "<%= Ratchet.Data.content(name) %>",
@@ -37,7 +37,7 @@ defmodule Ratchet.TransformerTest do
 
     assert result == [
       {"h2", [], []},
-      "<%= for foo <- List.wrap(data.foo) do %>",
+      "<%= for foo <- Ratchet.Data.property(data, :foo) |> Ratchet.Data.prepare do %>",
       {"div", ["<%= Ratchet.Data.attributes(foo, [{\"data-prop\", \"foo\"}]) %>"], [
         "<%= if Ratchet.Data.content?(foo) do %>",
         "<%= Ratchet.Data.content(foo) %>",
