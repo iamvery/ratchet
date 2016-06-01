@@ -1,4 +1,8 @@
 defmodule Ratchet.EEx do
+  @moduledoc """
+  Generates EEx in compiled Ratchet templates
+  """
+
   @doc """
   Build an EEx list comprehension from a scope and a property
 

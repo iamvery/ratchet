@@ -1,4 +1,8 @@
 defmodule Ratchet.Transformer do
+  @moduledoc """
+  Transforms Ratchet into EEx
+  """
+
   import Ratchet.EEx
 
   @doc """

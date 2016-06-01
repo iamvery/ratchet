@@ -1,4 +1,8 @@
 defmodule Ratchet.Data do
+  @moduledoc """
+  Handles Ratchet data during EEx rendering
+  """
+
   @doc """
   Get the specified property from the given data
 
