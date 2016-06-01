@@ -7,8 +7,8 @@ defmodule Ratchet.Data do
       iex> Data.content({"text", []})
       "text"
   """
+  def content({text, _attributes}) when is_binary(text), do: text
   def content(text) when is_binary(text), do: text
-  def content({text, _attributes}), do: text
 
   @doc """
   Extract attributes from a data property
