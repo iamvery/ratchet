@@ -5,7 +5,8 @@ defmodule Ratchet.Data do
   Data is defined in the following forms:
 
   1. A map of property keys to data values
-  2. Something else...
+  2. A tuple who's first element is such a map and second element is data attributes
+  3. Something else...
 
   This function provides a consistent interface for fetching a property from
   some body of data.
@@ -14,11 +15,14 @@ defmodule Ratchet.Data do
       nil
       iex> Data.property(%{foo: "bar"}, :foo)
       "bar"
+      iex> Data.property({%{foo: "bar"}, []}, :foo)
+      "bar"
       iex> Data.property({"Content", []}, :foo)
       nil
       iex> Data.property([attr: "value"], :foo)
       nil
   """
+  def property({map, _attributes}, property) when is_map(map), do: map[property]
   def property(map, property) when is_map(map), do: map[property]
   def property(_other, _property), do: nil
 
