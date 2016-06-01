@@ -15,7 +15,7 @@ defmodule Ratchet.Transformer do
   def transform(element, scope) when is_tuple(element) do
     case get_type(element) do
       :none -> transform_children(element, scope)
-      type -> transform_element(type, element, scope)
+      type -> transform_element(element, scope, type)
     end
   end
 
@@ -34,15 +34,15 @@ defmodule Ratchet.Transformer do
     end
   end
 
-  defp transform_element({_type, property} = type, element, scope) do
+  defp transform_element(element, scope, {_type, property} = type) do
     [
       eex_comprehension_open(scope, property),
-      transform_element(type, element),
+      transform_element(element, type),
       eex_close,
     ]
   end
 
-  defp transform_element({:property, property}, element) do
+  defp transform_element(element, {:property, property}) do
     {element, property}
     |> transform_attributes
     |> transform_content
