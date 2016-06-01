@@ -23,26 +23,26 @@ defmodule Ratchet.Transformer do
   Get the "type" of a node. First property is returned.
 
       iex> Transformer.get_type({"div", [{"data-prop", "bar"}], []})
-      {:property, "bar"}
+      "bar"
       iex> Transformer.get_type({"div", [], []})
       :none
   """
   def get_type({_tag, attributes, _children}) do
     Enum.find_value attributes, :none, fn
-      {"data-prop", prop} -> {:property, prop}
+      {"data-prop", prop} -> prop
       _ -> false
     end
   end
 
-  defp transform_element(element, scope, {_type, property} = type) do
+  defp transform_element(element, scope, property) do
     [
       eex_comprehension_open(scope, property),
-      transform_element(element, type),
+      transform_element(element, property),
       eex_close,
     ]
   end
 
-  defp transform_element(element, {:property, property}) do
+  defp transform_element(element, property) do
     {element, property}
     |> transform_attributes
     |> transform_content
