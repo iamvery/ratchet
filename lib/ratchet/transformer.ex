@@ -20,20 +20,15 @@ defmodule Ratchet.Transformer do
   end
 
   @doc """
-  Get the "type" of a node. First property or scope is returned.
+  Get the "type" of a node. First property is returned.
 
-      iex> Transformer.get_type({"div", [{"data-scope", "foo"}], []})
-      {:scope, "foo"}
       iex> Transformer.get_type({"div", [{"data-prop", "bar"}], []})
       {:property, "bar"}
-      iex> Transformer.get_type({"div", [{"data-scope", "foo"}, {"data-prop", "bar"}], []})
-      {:scope, "foo"}
       iex> Transformer.get_type({"div", [], []})
       :none
   """
   def get_type({_tag, attributes, _children}) do
     Enum.find_value attributes, :none, fn
-      {"data-scope", scope} -> {:scope, scope}
       {"data-prop", prop} -> {:property, prop}
       _ -> false
     end
@@ -45,12 +40,6 @@ defmodule Ratchet.Transformer do
       transform_element(type, element),
       eex_close,
     ]
-  end
-
-  defp transform_element({:scope, property}, element) do
-    {element, property}
-    |> transform_children
-    |> elem(0)
   end
 
   defp transform_element({:property, property}, element) do
