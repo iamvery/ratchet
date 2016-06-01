@@ -11,6 +11,12 @@ defmodule Ratchet.Mixfile do
      start_permanent: Mix.env == :prod,
      description: description,
      package: package,
+     docs: [
+       extras: ["README.md"],
+       main: "readme",
+       source_ref: "v#{@version}",
+       source_url: "https://github.com/iamvery/ratchet"
+     ],
      deps: deps]
   end
 
