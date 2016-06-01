@@ -63,7 +63,7 @@ data = %{
 
 ## Installation
 
-1. Install with [Hex][hex]:
+1. Install with Hex:
 
    ```elixir
    def deps do
@@ -93,5 +93,4 @@ One you get this from design, you can sprinkle in the appropriate properties for
 [phoenix-ratchet]: https://github.com/iamvery/phoenix_ratchet
 [pakyow]: https://pakyow.org
 [docs]: https://hexdocs.pm/ratchet
-[hex]: https://hex.pm/
 [vtp]: https://pakyow.org/docs/concepts/view-transformation-protocol
