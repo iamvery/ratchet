@@ -43,7 +43,9 @@ defmodule Ratchet.RendererTest do
   end
 
   @template """
-  <div data-prop="foo"></div>
+  <div data-prop="foo">
+    <div data-prop="bar">Nothing to see here</div>
+  </div>
   """ |> Floki.parse |> Floki.raw_html
 
   test "empty data renders unaffected template" do

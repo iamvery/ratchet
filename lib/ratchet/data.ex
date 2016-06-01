@@ -2,9 +2,10 @@ defmodule Ratchet.Data do
   @doc """
   Get the specified property from the given data
 
-  Data is defined as:
+  Data is defined in the following forms:
 
   1. A map of property keys to data values
+  2. Something else...
 
   This function provides a consistent interface for fetching a property from
   some body of data.
@@ -13,8 +14,13 @@ defmodule Ratchet.Data do
       nil
       iex> Data.property(%{foo: "bar"}, :foo)
       "bar"
+      iex> Data.property({"Content", []}, :foo)
+      nil
+      iex> Data.property([attr: "value"], :foo)
+      nil
   """
   def property(map, property) when is_map(map), do: map[property]
+  def property(_other, _property), do: nil
 
   @doc """
   Prepares data for list comprehension
@@ -31,7 +37,10 @@ defmodule Ratchet.Data do
       [{"foo", href: "/"}]
       iex> Data.prepare({"foo", class: "btn"})
       [{"foo", class: "btn"}]
+      iex> Data.prepare(nil)
+      [nil]
   """
+  def prepare(nil), do: [nil]
   def prepare(data), do: List.wrap(data)
 
   @doc """
