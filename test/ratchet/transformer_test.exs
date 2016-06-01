@@ -3,28 +3,22 @@ defmodule Ratchet.TransformerTest do
   alias Ratchet.Transformer
   doctest Transformer
 
-  @ratchet_list_ast {"div", [], [
-      {"ul", [{"data-scope", "list"}], [
-        {"li", [{"data-prop", "name"}], []},
-      ]},
+  @ratchet_list_ast {"ul", [], [
+      {"li", [{"data-prop", "name"}], []},
     ]}
 
-  @eex_list_ast {"div", [], [
-        "<%= for list <- List.wrap(data.list) do %>",
-        {"ul", [{"data-scope", "list"}], [
-          "<%= for name <- List.wrap(list.name) do %>",
-          {"li", ["<%= Ratchet.Data.attributes(name, [{\"data-prop\", \"name\"}]) %>"], [
-            "<%= if Ratchet.Data.content?(name) do %>",
-            "<%= Ratchet.Data.content(name) %>",
-            "<% else %>",
-            "<% end %>"
-          ]},
+  @eex_list_ast {"ul", [], [
+        "<%= for name <- List.wrap(data.name) do %>",
+        {"li", ["<%= Ratchet.Data.attributes(name, [{\"data-prop\", \"name\"}]) %>"], [
+          "<%= if Ratchet.Data.content?(name) do %>",
+          "<%= Ratchet.Data.content(name) %>",
+          "<% else %>",
           "<% end %>",
         ]},
         "<% end %>",
       ]}
 
-  test "transform/1 transforms tree to include EEx statements for scopes and properties" do
+  test "transform/1 transforms tree to include EEx statements for properties" do
     result = Transformer.transform(@ratchet_list_ast)
 
     assert result == @eex_list_ast
@@ -38,9 +32,19 @@ defmodule Ratchet.TransformerTest do
   end
 
   test "transform with adjacent top-level element" do
-    ast = [{"h2", [], []}, {"div", [{"data-scope", "foo"}], []}]
+    ast = [{"h2", [], []}, {"div", [{"data-prop", "foo"}], []}]
     result = Transformer.transform(ast)
 
-    assert result == [{"h2", [], []}, "<%= for foo <- List.wrap(data.foo) do %>", {"div", [{"data-scope", "foo"}], []}, "<% end %>"]
+    assert result == [
+      {"h2", [], []},
+      "<%= for foo <- List.wrap(data.foo) do %>",
+      {"div", ["<%= Ratchet.Data.attributes(foo, [{\"data-prop\", \"foo\"}]) %>"], [
+        "<%= if Ratchet.Data.content?(foo) do %>",
+        "<%= Ratchet.Data.content(foo) %>",
+        "<% else %>",
+        "<% end %>",
+      ]},
+      "<% end %>",
+    ]
   end
 end

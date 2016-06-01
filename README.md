@@ -15,7 +15,7 @@ Given a plain HTML view template like this:
 
 ```html
 <section>
-  <article data-scope="posts">
+  <article data-prop="posts">
     <h2 data-prop="title"></h2>
     <p data-prop="body"></p>
     <a data-prop="permalink"></p>
@@ -39,7 +39,7 @@ data = %{
 
 ```html
 <section>
-  <article data-scope="posts">
+  <article data-prop="posts">
     <h2 data-prop="title">Ratchet is here!</h2>
     <p data-prop="body">Hope you like it</p>
     <a href="https://iamvery.com" data-prop="permalink">Iamvery</p>
@@ -47,7 +47,7 @@ data = %{
       <li data-prop="comments">Not bad</li>
     </ul>
   </article>
-  <article data-scope="posts">
+  <article data-prop="posts">
     <h2 data-prop="title">Robots</h2>
     <p data-prop="body">What's the deal with them?</p>
     <a href="https://google.com" data-prop="permalink">Google</p>
@@ -73,10 +73,10 @@ For more information, see the [Documentation][docs].
 
 ## Background
 
-Ratchet is an implementation of [Pakyow's][pakyow] [view transformation protocol][vtp].
+Ratchet is inspired by [Pakyow's][pakyow] [view transformation protocol][vtp].
 One of the benefits of this style of view templates is designers don't have to learn whatever the latest templating language.
 Instead views are plain HTML and CSS.
-One you get this from design, you can sprinkle in the appropriate scopes and properties for data binding.
+One you get this from design, you can sprinkle in the appropriate properties for data binding.
 
 ## Release
 

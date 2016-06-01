@@ -13,64 +13,49 @@ defmodule Ratchet.Transformer do
 
   def transform(text, _scope) when is_binary(text), do: text
   def transform(element, scope) when is_tuple(element) do
-    case get_type(element) do
-      :none -> transform_element(element, scope)
-      type -> transform_element(type, element, scope)
+    case get_prop(element) do
+      :none -> transform_children(element, scope)
+      prop -> transform_element(element, scope, prop)
     end
   end
 
   @doc """
-  Get the "type" of a node. First property or scope is returned.
+  Get the "type" of a node. First property is returned.
 
-      iex> Transformer.get_type({"div", [{"data-scope", "foo"}], []})
-      {:scope, "foo"}
-      iex> Transformer.get_type({"div", [{"data-prop", "bar"}], []})
-      {:property, "bar"}
-      iex> Transformer.get_type({"div", [{"data-scope", "foo"}, {"data-prop", "bar"}], []})
-      {:scope, "foo"}
-      iex> Transformer.get_type({"div", [], []})
+      iex> Transformer.get_prop({"div", [{"data-prop", "bar"}], []})
+      "bar"
+      iex> Transformer.get_prop({"div", [], []})
       :none
   """
-  def get_type({_tag, attributes, _children}) do
+  def get_prop({_tag, attributes, _children}) do
     Enum.find_value attributes, :none, fn
-      {"data-scope", scope} -> {:scope, scope}
-      {"data-prop", prop} -> {:property, prop}
+      {"data-prop", prop} -> prop
       _ -> false
     end
   end
 
-  defp transform_element({_type, property} = type, element, scope) do
+  defp transform_element(element, scope, property) do
     [
       eex_comprehension_open(scope, property),
-      transform_element(type, element),
+      transform_element(element, property),
       eex_close,
     ]
   end
 
-  defp transform_element({:scope, property}, element) do
-    {element, property}
-    |> transform_children
-    |> elem(0)
-  end
-
-  defp transform_element({:property, property}, element) do
+  defp transform_element(element, property) do
     {element, property}
     |> transform_attributes
     |> transform_content
     |> elem(0)
   end
 
-  defp transform_element(element, scope) do
-    transform_children({element, scope}) |> elem(0)
-  end
-
-  defp transform_children({{tag, attributes, children}, property}) do
+  defp transform_children({tag, attributes, children}, property) do
     children = transform(children, property)
-    {{tag, attributes, children}, property}
+    {tag, attributes, children}
   end
 
   defp transform_content({{tag, attributes, children}, property}) do
-    children = eex_content(property, children)
+    children = eex_content(property, transform(children, property))
     {{tag, attributes, children}, property}
   end
 
