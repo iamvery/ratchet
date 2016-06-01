@@ -50,4 +50,14 @@ defmodule Ratchet.RendererTest do
     data = %{foo: {nil, []}}
     assert Renderer.render(@template, data) == @template
   end
+
+  test "plain text data replaces template" do
+    data = %{foo: "The content"}
+
+    rendered = """
+    <div data-prop="foo">The content</div>
+    """ |> Floki.parse |> Floki.raw_html
+
+    assert Renderer.render(@template, data) == rendered
+  end
 end
