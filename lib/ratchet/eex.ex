@@ -3,10 +3,11 @@ defmodule Ratchet.EEx do
   Build an EEx list comprehension from a scope and a property
 
       iex> Ratchet.EEx.eex_comprehension_open("foo", "bar")
-      "<%= for bar <- List.wrap(foo.bar) do %>"
+      "<%= for bar <- Ratchet.Data.property(foo, :bar) |> Ratchet.Data.prepare do %>"
   """
   def eex_comprehension_open(scope, property) do
-    "<%= for #{property} <- List.wrap(#{scope}.#{property}) do %>"
+    property = String.to_atom(property)
+    "<%= for #{property} <- Ratchet.Data.property(#{scope}, #{inspect property}) |> Ratchet.Data.prepare do %>"
   end
 
   @doc """
