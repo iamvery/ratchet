@@ -1,4 +1,8 @@
 defmodule Ratchet.Renderer do
+  @moduledoc """
+  Renders Ratchet templates
+  """
+
   import Ratchet.Transformer, only: [transform: 1]
 
   @doc """

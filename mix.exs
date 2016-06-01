@@ -1,14 +1,22 @@
 defmodule Ratchet.Mixfile do
   use Mix.Project
 
+  @version "0.3.0"
+
   def project do
     [app: :ratchet,
-     version: "0.3.0",
+     version: @version,
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      description: description,
      package: package,
+     docs: [
+       extras: ["README.md"],
+       main: "readme",
+       source_ref: "v#{@version}",
+       source_url: "https://github.com/iamvery/ratchet"
+     ],
      deps: deps]
   end
 
