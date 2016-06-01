@@ -13,11 +13,21 @@ defmodule Ratchet.EEx do
   Build an EEx statement fetching content
 
       iex> Ratchet.EEx.eex_content("lolwat")
-      ["<%= Ratchet.Data.content(lolwat) %>"]
+      [
+        "<%= if Ratchet.Data.content?(lolwat) do %>",
+        "<%= Ratchet.Data.content(lolwat) %>",
+        "<% else %>",
+        "No content",
+        "<% end %>",
+      ]
   """
   def eex_content(property) do
     [
+      "<%= if Ratchet.Data.content?(#{property}) do %>",
       "<%= Ratchet.Data.content(#{property}) %>",
+      "<% else %>",
+      "No content",
+      eex_close,
     ]
   end
 
