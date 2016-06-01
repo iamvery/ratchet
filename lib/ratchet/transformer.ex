@@ -13,21 +13,21 @@ defmodule Ratchet.Transformer do
 
   def transform(text, _scope) when is_binary(text), do: text
   def transform(element, scope) when is_tuple(element) do
-    case get_type(element) do
+    case get_prop(element) do
       :none -> transform_children(element, scope)
-      type -> transform_element(element, scope, type)
+      prop -> transform_element(element, scope, prop)
     end
   end
 
   @doc """
   Get the "type" of a node. First property is returned.
 
-      iex> Transformer.get_type({"div", [{"data-prop", "bar"}], []})
+      iex> Transformer.get_prop({"div", [{"data-prop", "bar"}], []})
       "bar"
-      iex> Transformer.get_type({"div", [], []})
+      iex> Transformer.get_prop({"div", [], []})
       :none
   """
-  def get_type({_tag, attributes, _children}) do
+  def get_prop({_tag, attributes, _children}) do
     Enum.find_value attributes, :none, fn
       {"data-prop", prop} -> prop
       _ -> false
