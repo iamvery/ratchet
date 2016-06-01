@@ -17,7 +17,6 @@ defmodule Ratchet.TransformerTest do
             "<%= if Ratchet.Data.content?(name) do %>",
             "<%= Ratchet.Data.content(name) %>",
             "<% else %>",
-            "No content",
             "<% end %>"
           ]},
           "<% end %>",

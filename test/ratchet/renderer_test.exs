@@ -44,14 +44,10 @@ defmodule Ratchet.RendererTest do
 
   test "render default content" do
     template = """
-    <div data-prop="foo"></div>
-    """
+    <div data-prop="foo">None</div>
+    """ |> Floki.parse |> Floki.raw_html
     data = %{foo: {nil, []}}
 
-    rendered = """
-    <div data-prop="foo">No content</div>
-    """ |> Floki.parse |> Floki.raw_html
-
-    assert Ratchet.Renderer.render(template, data) == rendered
+    assert Ratchet.Renderer.render(template, data) == template
   end
 end
