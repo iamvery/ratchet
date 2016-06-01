@@ -96,6 +96,18 @@ defmodule Ratchet.RendererTest do
     assert Renderer.render(@template, data) == rendered
   end
 
+  test "keyword data updates property attributes" do
+    data = %{foo: [class: "large"]}
+
+    rendered = """
+    <div class="large" data-prop="foo">
+      <div data-prop="bar">Nothing to see here</div>
+    </div>
+    """ |> Floki.parse |> Floki.raw_html
+
+    assert Renderer.render(@template, data) == rendered
+  end
+
   test "tuple data with map binds to internal property and updates attributes" do
     data = %{foo: {%{bar: {"Fido", class: "dog"}}, class: "pet"}}
 

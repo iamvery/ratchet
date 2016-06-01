@@ -37,6 +37,8 @@ defmodule Ratchet.Data do
       ["data"]
       iex> Data.prepare(["one", "two"])
       ["one", "two"]
+      iex> Data.prepare([href: "/"])
+      [[href: "/"]]
       iex> Data.prepare([{"foo", href: "/"}])
       [{"foo", href: "/"}]
       iex> Data.prepare({"foo", class: "btn"})
@@ -45,6 +47,7 @@ defmodule Ratchet.Data do
       [nil]
   """
   def prepare(nil), do: [nil]
+  def prepare([{key,_value}|_rest] = data) when is_atom(key), do: [data]
   def prepare(data), do: List.wrap(data)
 
   @doc """
@@ -81,12 +84,17 @@ defmodule Ratchet.Data do
 
       iex> Data.attributes({"", href: "https://google.com", rel: "nofollow"}, [])
       {:safe, ~S(href="https://google.com" rel="nofollow")}
+      iex> Data.attributes([href: "/"], [{"data-prop", "link"}])
+      {:safe, ~S(href="/" data-prop="link")}
       iex> Data.attributes([{"foo", href: "/"}], [{"data-prop", "link"}])
       {:safe, ~S(data-prop="link")}
       iex> Data.attributes("lolwat", [{"data-prop", "joke"}])
       {:safe, ~S(data-prop="joke")}
   """
   def attributes({_content, data_attrs}, elem_attrs) do
+    build_attrs(data_attrs ++ elem_attrs)
+  end
+  def attributes([{key,_value}|_rest] = data_attrs, elem_attrs) when is_atom(key) do
     build_attrs(data_attrs ++ elem_attrs)
   end
   def attributes(_data, elem_attrs), do: build_attrs(elem_attrs)
