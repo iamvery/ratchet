@@ -70,7 +70,7 @@ defmodule Ratchet.Transformer do
   end
 
   defp transform_content({{tag, attributes, _children}, property}) do
-    children = eex_content(property) |> List.wrap
+    children = eex_content(property)
     {{tag, attributes, children}, property}
   end
 
