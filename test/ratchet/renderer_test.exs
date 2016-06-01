@@ -52,7 +52,7 @@ defmodule Ratchet.RendererTest do
     assert Renderer.render(@template, %{}) == @template
   end
 
-  test "plain text data replaces template" do
+  test "plain text data replaces content" do
     data = %{foo: "The content"}
 
     rendered = """
@@ -84,7 +84,7 @@ defmodule Ratchet.RendererTest do
     assert Renderer.render(@template, data) == rendered
   end
 
-  test "map data binds to internal property" do
+  test "map data binds to recursively" do
     data = %{foo: %{bar: "The content"}}
 
     rendered = """
@@ -96,7 +96,7 @@ defmodule Ratchet.RendererTest do
     assert Renderer.render(@template, data) == rendered
   end
 
-  test "keyword data updates property attributes" do
+  test "keyword data updates attributes" do
     data = %{foo: [class: "large"]}
 
     rendered = """
@@ -108,7 +108,7 @@ defmodule Ratchet.RendererTest do
     assert Renderer.render(@template, data) == rendered
   end
 
-  test "tuple data with map binds to internal property and updates attributes" do
+  test "tuple data with map binds recursively and updates attributes" do
     data = %{foo: {%{bar: {"Fido", class: "dog"}}, class: "pet"}}
 
     rendered = """
