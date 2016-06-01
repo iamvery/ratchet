@@ -12,11 +12,23 @@ defmodule Ratchet.EEx do
   @doc """
   Build an EEx statement fetching content
 
-      iex> Ratchet.EEx.eex_content("lolwat")
-      "<%= Ratchet.Data.content(lolwat) %>"
+      iex> Ratchet.EEx.eex_content("lolwat", ["Content"])
+      [
+        "<%= if Ratchet.Data.content?(lolwat) do %>",
+        "<%= Ratchet.Data.content(lolwat) %>",
+        "<% else %>",
+        "Content",
+        "<% end %>",
+      ]
   """
-  def eex_content(property) do
-    "<%= Ratchet.Data.content(#{property}) %>"
+  def eex_content(property, default) do
+    [
+      "<%= if Ratchet.Data.content?(#{property}) do %>",
+      "<%= Ratchet.Data.content(#{property}) %>",
+      "<% else %>",
+      default,
+      eex_close,
+    ] |> List.flatten
   end
 
   @doc """

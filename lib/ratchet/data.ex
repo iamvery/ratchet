@@ -1,5 +1,23 @@
 defmodule Ratchet.Data do
   @doc """
+  Determines if the given data provides plain text content
+
+      iex> Data.content?("text")
+      true
+      iex> Data.content?({"text", href: "/foo/bar"})
+      true
+      iex> Data.content?([href: "/"])
+      false
+      iex> Data.content?(%{foo: "bar"})
+      false
+      iex> Data.content?({%{foo: "bar"}, action: "/baz"})
+      false
+  """
+  def content?({text, _attributes}) when is_binary(text), do: true
+  def content?(text) when is_binary(text), do: true
+  def content?(_data), do: false
+
+  @doc """
   Extract content from a data property
 
       iex> Data.content("text")
@@ -7,8 +25,8 @@ defmodule Ratchet.Data do
       iex> Data.content({"text", []})
       "text"
   """
+  def content({text, _attributes}) when is_binary(text), do: text
   def content(text) when is_binary(text), do: text
-  def content({text, _attributes}), do: text
 
   @doc """
   Extract attributes from a data property
