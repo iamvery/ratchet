@@ -20,7 +20,7 @@ Given a plain HTML view template like this:
   <article data-prop="posts">
     <h2 data-prop="title"></h2>
     <p data-prop="body"></p>
-    <a data-prop="permalink"></p>
+    <a data-prop="permalink"></a>
     <ul>
       <li data-prop="comments"></li>
     </ul>
@@ -44,7 +44,7 @@ data = %{
   <article data-prop="posts">
     <h2 data-prop="title">Ratchet is here!</h2>
     <p data-prop="body">Hope you like it</p>
-    <a href="https://iamvery.com" data-prop="permalink">Iamvery</p>
+    <a href="https://iamvery.com" data-prop="permalink">Iamvery</a>
     <ul>
       <li data-prop="comments">Not bad</li>
     </ul>
@@ -52,7 +52,7 @@ data = %{
   <article data-prop="posts">
     <h2 data-prop="title">Robots</h2>
     <p data-prop="body">What's the deal with them?</p>
-    <a href="https://google.com" data-prop="permalink">Google</p>
+    <a href="https://google.com" data-prop="permalink">Google</a>
     <ul>
       <li data-prop="comments">Yea!</li>
       <li data-prop="comments">Nah</li>
