@@ -1,4 +1,4 @@
-defmodule Ratchet.Data do
+defmodule Ratchet.Template do
   @moduledoc """
   Handles Ratchet data during EEx rendering
   """
@@ -15,15 +15,15 @@ defmodule Ratchet.Data do
   This function provides a consistent interface for fetching a property from
   some body of data.
 
-      iex> Data.property(%{}, :foo)
+      iex> Template.property(%{}, :foo)
       nil
-      iex> Data.property(%{foo: "bar"}, :foo)
+      iex> Template.property(%{foo: "bar"}, :foo)
       "bar"
-      iex> Data.property({%{foo: "bar"}, []}, :foo)
+      iex> Template.property({%{foo: "bar"}, []}, :foo)
       "bar"
-      iex> Data.property({"Content", []}, :foo)
+      iex> Template.property({"Content", []}, :foo)
       nil
-      iex> Data.property([attr: "value"], :foo)
+      iex> Template.property([attr: "value"], :foo)
       nil
   """
   def property({map, _attributes}, property) when is_map(map), do: map[property]
@@ -37,17 +37,17 @@ defmodule Ratchet.Data do
   rendering multiple elements. This function supports that requirement by
   ensuring elements are wrapped in a list.
 
-      iex> Data.prepare("data")
+      iex> Template.prepare("data")
       ["data"]
-      iex> Data.prepare(["one", "two"])
+      iex> Template.prepare(["one", "two"])
       ["one", "two"]
-      iex> Data.prepare([href: "/"])
+      iex> Template.prepare([href: "/"])
       [[href: "/"]]
-      iex> Data.prepare([{"foo", href: "/"}])
+      iex> Template.prepare([{"foo", href: "/"}])
       [{"foo", href: "/"}]
-      iex> Data.prepare({"foo", class: "btn"})
+      iex> Template.prepare({"foo", class: "btn"})
       [{"foo", class: "btn"}]
-      iex> Data.prepare(nil)
+      iex> Template.prepare(nil)
       [nil]
   """
   def prepare(nil), do: [nil]
@@ -57,15 +57,15 @@ defmodule Ratchet.Data do
   @doc """
   Determines if the given data provides plain text content
 
-      iex> Data.content?("text")
+      iex> Template.content?("text")
       true
-      iex> Data.content?({"text", href: "/foo/bar"})
+      iex> Template.content?({"text", href: "/foo/bar"})
       true
-      iex> Data.content?([href: "/"])
+      iex> Template.content?([href: "/"])
       false
-      iex> Data.content?(%{foo: "bar"})
+      iex> Template.content?(%{foo: "bar"})
       false
-      iex> Data.content?({%{foo: "bar"}, action: "/baz"})
+      iex> Template.content?({%{foo: "bar"}, action: "/baz"})
       false
   """
   def content?({text, _attributes}) when is_binary(text), do: true
@@ -75,9 +75,9 @@ defmodule Ratchet.Data do
   @doc """
   Extract content from a data property
 
-      iex> Data.content("text")
+      iex> Template.content("text")
       "text"
-      iex> Data.content({"text", []})
+      iex> Template.content({"text", []})
       "text"
   """
   def content({text, _attributes}) when is_binary(text), do: text
@@ -86,13 +86,13 @@ defmodule Ratchet.Data do
   @doc """
   Extract attributes from a data property
 
-      iex> Data.attributes({"", href: "https://google.com", rel: "nofollow"}, [])
+      iex> Template.attributes({"", href: "https://google.com", rel: "nofollow"}, [])
       {:safe, ~S(href="https://google.com" rel="nofollow")}
-      iex> Data.attributes([href: "/"], [{"data-prop", "link"}])
+      iex> Template.attributes([href: "/"], [{"data-prop", "link"}])
       {:safe, ~S(href="/" data-prop="link")}
-      iex> Data.attributes([{"foo", href: "/"}], [{"data-prop", "link"}])
+      iex> Template.attributes([{"foo", href: "/"}], [{"data-prop", "link"}])
       {:safe, ~S(data-prop="link")}
-      iex> Data.attributes("lolwat", [{"data-prop", "joke"}])
+      iex> Template.attributes("lolwat", [{"data-prop", "joke"}])
       {:safe, ~S(data-prop="joke")}
   """
   def attributes({_content, data_attrs}, elem_attrs) do
