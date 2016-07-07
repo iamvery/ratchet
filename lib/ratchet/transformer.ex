@@ -37,6 +37,7 @@ defmodule Ratchet.Transformer do
       _ -> false
     end
   end
+  def get_prop(_), do: :none
 
   defp transform_element(element, scope, property) do
     [
@@ -57,6 +58,7 @@ defmodule Ratchet.Transformer do
     children = transform(children, property)
     {tag, attributes, children}
   end
+  defp transform_children(element, _property), do: element
 
   defp transform_content({{tag, attributes, children}, property}) do
     children = eex_content(property, transform(children, property))

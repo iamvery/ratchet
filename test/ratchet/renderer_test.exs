@@ -5,6 +5,7 @@ defmodule Ratchet.RendererTest do
 
   @template """
   <h2>Articles</h2>
+  <!-- comment -->
   <article class="post" data-prop="posts">
     <p data-prop="body"></p>
     <a data-prop="link"></a>
@@ -22,6 +23,7 @@ defmodule Ratchet.RendererTest do
 
     rendered = """
     <h2>Articles</h2>
+    <!-- comment -->
     <article class="post" data-prop="posts">
       <p data-prop="body">Thoughts and opinions.</p>
       <a href="https://google.com" data-prop="link">Google</a>
