@@ -85,7 +85,7 @@ One you get this from design, you can sprinkle in the appropriate properties for
 1. Publish to Hex
 
    ```
-   $ mix do hex.publish, hex.docs
+   $ mix hex.publish docs
    ```
 
 
