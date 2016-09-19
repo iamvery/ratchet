@@ -8,6 +8,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - Added changelog to project
+- Added Ratchet.Data module for data building (https://github.com/iamvery/ratchet/pull/46)
 
 ### Changed
 - Move things under Ratchet.Data to Ratchet.Template (https://github.com/iamvery/ratchet/pull/49)
