@@ -7,11 +7,11 @@ defmodule Ratchet.EEx do
   Build an EEx list comprehension from a scope and a property
 
       iex> Ratchet.EEx.eex_comprehension_open("foo", "bar")
-      "<%= for bar <- Ratchet.Data.property(foo, :bar) |> Ratchet.Data.prepare do %>"
+      "<%= for bar <- Ratchet.Template.property(foo, :bar) |> Ratchet.Template.prepare do %>"
   """
   def eex_comprehension_open(scope, property) do
     property = String.to_atom(property)
-    "<%= for #{property} <- Ratchet.Data.property(#{scope}, #{inspect property}) |> Ratchet.Data.prepare do %>"
+    "<%= for #{property} <- Ratchet.Template.property(#{scope}, #{inspect property}) |> Ratchet.Template.prepare do %>"
   end
 
   @doc """
@@ -19,8 +19,8 @@ defmodule Ratchet.EEx do
 
       iex> Ratchet.EEx.eex_content("lolwat", ["Content"])
       [
-        "<%= if Ratchet.Data.content?(lolwat) do %>",
-        "<%= Ratchet.Data.content(lolwat) %>",
+        "<%= if Ratchet.Template.content?(lolwat) do %>",
+        "<%= Ratchet.Template.content(lolwat) %>",
         "<% else %>",
         "Content",
         "<% end %>",
@@ -28,8 +28,8 @@ defmodule Ratchet.EEx do
   """
   def eex_content(property, default) do
     [
-      "<%= if Ratchet.Data.content?(#{property}) do %>",
-      "<%= Ratchet.Data.content(#{property}) %>",
+      "<%= if Ratchet.Template.content?(#{property}) do %>",
+      "<%= Ratchet.Template.content(#{property}) %>",
       "<% else %>",
       default,
       eex_close,
@@ -40,10 +40,10 @@ defmodule Ratchet.EEx do
   Build an EEx statement fetching attributes
 
       iex> Ratchet.EEx.eex_attributes("lolwat", [])
-      "<%= Ratchet.Data.attributes(lolwat, []) %>"
+      "<%= Ratchet.Template.attributes(lolwat, []) %>"
   """
   def eex_attributes(property, attributes) do
-    "<%= Ratchet.Data.attributes(#{property}, #{inspect attributes}) %>"
+    "<%= Ratchet.Template.attributes(#{property}, #{inspect attributes}) %>"
   end
 
   @doc """

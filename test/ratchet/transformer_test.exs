@@ -8,10 +8,10 @@ defmodule Ratchet.TransformerTest do
     ]}
 
   @eex_list_ast {"ul", [], [
-        "<%= for name <- Ratchet.Data.property(data, :name) |> Ratchet.Data.prepare do %>",
-        {"li", ["<%= Ratchet.Data.attributes(name, [{\"data-prop\", \"name\"}]) %>"], [
-          "<%= if Ratchet.Data.content?(name) do %>",
-          "<%= Ratchet.Data.content(name) %>",
+        "<%= for name <- Ratchet.Template.property(data, :name) |> Ratchet.Template.prepare do %>",
+        {"li", ["<%= Ratchet.Template.attributes(name, [{\"data-prop\", \"name\"}]) %>"], [
+          "<%= if Ratchet.Template.content?(name) do %>",
+          "<%= Ratchet.Template.content(name) %>",
           "<% else %>",
           "<% end %>",
         ]},
@@ -37,10 +37,10 @@ defmodule Ratchet.TransformerTest do
 
     assert result == [
       {"h2", [], []},
-      "<%= for foo <- Ratchet.Data.property(data, :foo) |> Ratchet.Data.prepare do %>",
-      {"div", ["<%= Ratchet.Data.attributes(foo, [{\"data-prop\", \"foo\"}]) %>"], [
-        "<%= if Ratchet.Data.content?(foo) do %>",
-        "<%= Ratchet.Data.content(foo) %>",
+      "<%= for foo <- Ratchet.Template.property(data, :foo) |> Ratchet.Template.prepare do %>",
+      {"div", ["<%= Ratchet.Template.attributes(foo, [{\"data-prop\", \"foo\"}]) %>"], [
+        "<%= if Ratchet.Template.content?(foo) do %>",
+        "<%= Ratchet.Template.content(foo) %>",
         "<% else %>",
         "<% end %>",
       ]},
