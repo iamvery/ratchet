@@ -39,6 +39,14 @@ data = %{
 }
 ```
 
+You may also use the data helpers to build data.
+If you already have a data model, your code might look like:
+
+```elixir
+alias Ratchet.Data
+data = Data.new |> Data.scope(:posts, Repo.all(Post))
+```
+
 ```html
 <section>
   <article data-prop="posts">
