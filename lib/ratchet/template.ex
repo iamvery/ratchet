@@ -61,27 +61,35 @@ defmodule Ratchet.Template do
       true
       iex> Template.content?({"text", href: "/foo/bar"})
       true
+      iex> Template.content?(123)
+      true
       iex> Template.content?([href: "/"])
       false
       iex> Template.content?(%{foo: "bar"})
       false
       iex> Template.content?({%{foo: "bar"}, action: "/baz"})
       false
+      iex> Template.content?(nil)
+      false
   """
-  def content?({text, _attributes}) when is_binary(text), do: true
-  def content?(text) when is_binary(text), do: true
-  def content?(_data), do: false
+  def content?(map) when is_map(map), do: false
+  def content?(list) when is_list(list), do: false
+  def content?({map, _attributes}) when is_map(map), do: false
+  def content?(nil), do: false
+  def content?(_), do: true
 
   @doc """
   Extract content from a data property
 
       iex> Template.content("text")
       "text"
+      iex> Template.content(123)
+      123
       iex> Template.content({"text", []})
       "text"
   """
-  def content({text, _attributes}) when is_binary(text), do: text
-  def content(text) when is_binary(text), do: text
+  def content({content, _attrs}), do: content
+  def content(content), do: content
 
   @doc """
   Extract attributes from a data property

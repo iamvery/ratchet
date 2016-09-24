@@ -121,4 +121,14 @@ defmodule Ratchet.RendererTest do
 
     assert Renderer.render(@template, data) == rendered
   end
+
+  test "non-string data" do
+    data = %{foo: 123}
+
+    rendered = """
+    <div data-prop="foo">123</div>
+    """ |> Floki.parse |> Floki.raw_html
+
+    assert Renderer.render(@template, data) == rendered
+  end
 end
