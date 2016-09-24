@@ -68,9 +68,11 @@ defmodule Ratchet.Template do
       iex> Template.content?({%{foo: "bar"}, action: "/baz"})
       false
   """
-  def content?({text, _attributes}) when is_binary(text), do: true
-  def content?(text) when is_binary(text), do: true
-  def content?(_data), do: false
+  def content?(map) when is_map(map), do: false
+  def content?(list) when is_list(list), do: false
+  def content?({map, _attributes}) when is_map(map), do: false
+  def content?(nil), do: false
+  def content?(_), do: true
 
   @doc """
   Extract content from a data property
