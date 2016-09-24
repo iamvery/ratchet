@@ -83,11 +83,13 @@ defmodule Ratchet.Template do
 
       iex> Template.content("text")
       "text"
+      iex> Template.content(123)
+      123
       iex> Template.content({"text", []})
       "text"
   """
-  def content({text, _attributes}) when is_binary(text), do: text
-  def content(text) when is_binary(text), do: text
+  def content({content, _attrs}), do: content
+  def content(content), do: content
 
   @doc """
   Extract attributes from a data property
