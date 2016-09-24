@@ -61,11 +61,15 @@ defmodule Ratchet.Template do
       true
       iex> Template.content?({"text", href: "/foo/bar"})
       true
+      iex> Template.content?(123)
+      true
       iex> Template.content?([href: "/"])
       false
       iex> Template.content?(%{foo: "bar"})
       false
       iex> Template.content?({%{foo: "bar"}, action: "/baz"})
+      false
+      iex> Template.content?(nil)
       false
   """
   def content?(map) when is_map(map), do: false
