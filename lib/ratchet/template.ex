@@ -63,6 +63,8 @@ defmodule Ratchet.Template do
       true
       iex> Template.content?(123)
       true
+      iex> Template.content?({:safe, "<p>lolwat</p>"})
+      true
       iex> Template.content?([href: "/"])
       false
       iex> Template.content?(%{foo: "bar"})
@@ -87,7 +89,12 @@ defmodule Ratchet.Template do
       123
       iex> Template.content({"text", []})
       "text"
+      iex> Template.content({:safe, "<p>lolwat</p>"})
+      {:safe, "<p>lolwat</p>"}
+      iex> Template.content({{:safe, "<p>lolwat</p>"}, []})
+      {:safe, "<p>lolwat</p>"}
   """
+  def content({:safe, _} = content), do: content
   def content({content, _attrs}), do: content
   def content(content), do: content
 
@@ -102,7 +109,10 @@ defmodule Ratchet.Template do
       {:safe, ~S(data-prop="link")}
       iex> Template.attributes("lolwat", [{"data-prop", "joke"}])
       {:safe, ~S(data-prop="joke")}
+      iex> Template.attributes({:safe, "lolwat"}, [{"lol", "wat"}])
+      {:safe, ~S(lol="wat")}
   """
+  def attributes({:safe, _content}, elem_attrs), do: build_attrs(elem_attrs)
   def attributes({_content, data_attrs}, elem_attrs) do
     build_attrs(data_attrs ++ elem_attrs)
   end
