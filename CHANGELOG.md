@@ -13,5 +13,6 @@ project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Move things under Ratchet.Data to Ratchet.Template (https://github.com/iamvery/ratchet/pull/49)
 - Support struct data (https://github.com/iamvery/ratchet/pull/52)
+- Support non-string content (https://github.com/iamvery/ratchet/pull/47)
 
 [Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.3.3...HEAD
