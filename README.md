@@ -17,7 +17,7 @@ Given a plain HTML view template like this:
 
 ```html
 <section>
-  <article data-prop="posts">
+  <article data-prop="post">
     <h2 data-prop="title"></h2>
     <p data-prop="body"></p>
     <a data-prop="permalink"></a>
@@ -32,19 +32,11 @@ It can be transformed into your final view by applying data:
 
 ```elixir
 data = %{
-  posts: [
+  post: [
     %{title: "Ratchet is here!", body: "Hope you like it", permalink: {"Iamvery", href: "https://iamvery.com"}, comments: ["Not bad"]},
     %{title: "Robots", body: "What's the deal with them?", permalink: {"Google", href: "https://google.com"}, comments: ["Yea!", "Nah"]},
   ]
 }
-```
-
-You may also use the data helpers to build data.
-If you already have a data model, your code might look like:
-
-```elixir
-alias Ratchet.Data
-data = Data.new |> Data.scope(:posts, Repo.all(Post))
 ```
 
 ```html
