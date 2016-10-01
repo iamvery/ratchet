@@ -3,6 +3,8 @@ defmodule Ratchet.Template do
   Handles Ratchet data during EEx rendering
   """
 
+  require Logger
+
   @doc """
   Get the specified property from the given data
 
@@ -27,8 +29,16 @@ defmodule Ratchet.Template do
       nil
   """
   def property({data, _attributes}, property), do: property(data, property)
-  def property(map, property) when is_map(map), do: Map.get(map, property)
-  def property(_other, _property), do: nil
+  def property(map, property) when is_map(map) do
+    Map.get(map, property) |> log(property, map)
+  end
+  def property(data, property), do: log(nil, property, data)
+
+  defp log(nil, property, data) do
+    Logger.warn "Property #{inspect property} not available in data #{inspect data}"
+    nil
+  end
+  defp log(value, _property, _data), do: value
 
   @doc """
   Prepares data for list comprehension
