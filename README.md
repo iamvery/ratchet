@@ -41,7 +41,7 @@ data = %{
 
 ```html
 <section>
-  <article data-prop="posts">
+  <article data-prop="post">
     <h2 data-prop="title">Ratchet is here!</h2>
     <p data-prop="body">Hope you like it</p>
     <a href="https://iamvery.com" data-prop="permalink">Iamvery</a>
@@ -49,7 +49,7 @@ data = %{
       <li data-prop="comments">Not bad</li>
     </ul>
   </article>
-  <article data-prop="posts">
+  <article data-prop="post">
     <h2 data-prop="title">Robots</h2>
     <p data-prop="body">What's the deal with them?</p>
     <a href="https://google.com" data-prop="permalink">Google</a>
