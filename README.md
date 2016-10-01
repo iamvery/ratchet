@@ -67,7 +67,7 @@ data = %{
 
    ```elixir
    def deps do
-     [{:ratchet, "~> 0.2.1"}]
+     [{:ratchet, "~> 0.3"}]
    end
    ```
 
