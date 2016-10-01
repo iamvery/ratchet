@@ -26,7 +26,7 @@ defmodule Ratchet.Template do
       iex> Template.property([attr: "value"], :foo)
       nil
   """
-  def property({map, _attributes}, property) when is_map(map), do: Map.get(map, property)
+  def property({data, _attributes}, property), do: property(data, property)
   def property(map, property) when is_map(map), do: Map.get(map, property)
   def property(_other, _property), do: nil
 
