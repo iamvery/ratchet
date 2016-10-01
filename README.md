@@ -84,7 +84,7 @@ data = Data.new |> Data.scope(:posts, Repo.all(Post))
 Ratchet is inspired by [Pakyow's][pakyow] [view transformation protocol][vtp].
 One of the benefits of this style of view templates is designers don't have to learn whatever the latest templating language.
 Instead views are plain HTML and CSS.
-One you get this from design, you can sprinkle in the appropriate properties for data binding.
+Once you get an HTML prototype from design, you can sprinkle in the appropriate properties for data binding.
 
 ## Release
 
