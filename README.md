@@ -81,11 +81,13 @@ Once you get an HTML prototype from design, you can sprinkle in the appropriate 
 ## Release
 
 1. Bump the version in `mix.exs`.
+1. Add version to CHANGELOG.
 1. Commit version with Git tag `vX.X.X`.
-1. Publish to Hex
+1. Draft GitHub release.
+1. Publish to Hex.
 
    ```
-   $ mix hex.publish docs
+   $ mix do hex.publish, hex.publish docs
    ```
 
 
