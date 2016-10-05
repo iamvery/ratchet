@@ -16,4 +16,4 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - Support non-string content (https://github.com/iamvery/ratchet/pull/47)
 - Support Phoenix "safe" content in transforms (https://github.com/iamvery/ratchet/pull/54)
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.3.3...HEAD
+[Unreleased]: https://github.com/iamvery/ratchet/compare/v0.3.3...HEAD
