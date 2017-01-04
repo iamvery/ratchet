@@ -9,15 +9,15 @@ defmodule Ratchet.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     description: description,
-     package: package,
+     description: description(),
+     package: package(),
      docs: [
        extras: ["README.md"],
        main: "readme",
        source_ref: "v#{@version}",
        source_url: "https://github.com/iamvery/ratchet"
      ],
-     deps: deps]
+     deps: deps()]
   end
 
   # Configuration for the OTP application
