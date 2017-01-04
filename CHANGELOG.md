@@ -6,6 +6,9 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- Fixed some warnings from Elixir 1.4 (https://github.com/iamvery/ratchet/pull/62)
+
 ## [0.4.0]
 
 ### Added
