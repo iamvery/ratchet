@@ -43,7 +43,7 @@ defmodule Ratchet.Transformer do
     [
       eex_comprehension_open(scope, property),
       transform_element(element, property),
-      eex_close,
+      eex_close(),
     ]
   end
 

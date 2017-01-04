@@ -32,7 +32,7 @@ defmodule Ratchet.EEx do
       "<%= Ratchet.Template.content(#{property}) %>",
       "<% else %>",
       default,
-      eex_close,
+      eex_close(),
     ] |> List.flatten
   end
 
