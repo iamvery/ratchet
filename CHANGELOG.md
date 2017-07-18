@@ -6,6 +6,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.1]
+
 ### Changed
 - Fixed some warnings from Elixir 1.4 (https://github.com/iamvery/ratchet/pull/62)
 
@@ -21,5 +23,6 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - Support non-string content (https://github.com/iamvery/ratchet/pull/47)
 - Support Phoenix "safe" content in transforms (https://github.com/iamvery/ratchet/pull/54)
 
-[Unreleased]: https://github.com/iamvery/ratchet/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/iamvery/ratchet/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/iamvery/ratchet/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/iamvery/ratchet/compare/v0.3.3...v0.4.0
